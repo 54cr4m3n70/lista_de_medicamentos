@@ -3,4 +3,6 @@ import 'package:lista_de_medicamentos/src/features/medicamentos/domain/entities/
 abstract class IMedicamentoRepository {
   Future<Medicamento> getMedicamento({required int id});
   Future<List<Medicamento>> getAllMedicamentos();
+  void saveMedicamento(Medicamento item);
+  void removeMedicamento(int id);
 }
