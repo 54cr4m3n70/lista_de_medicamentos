@@ -1,16 +1,18 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:lista_de_medicamentos/src/features/medicamentos/data/repository_medicamentos.dart';
+import 'package:lista_de_medicamentos/src/features/medicamentos/domain/repository/medicamento_repository.dart';
+import 'package:lista_de_medicamentos/src/features/medicamentos/domain/usecases/medicamento_controller.dart';
 import 'package:mockito/mockito.dart';
-import 'package:sqflite/sqflite.dart';
 
-class MockDatabase extends Mock implements Database {}
+class MockMedicamentos extends Mock implements IMedicamentoRepository {}
 
 void main() {
-  RepositoryMedicamentos repositoryMedicamentos;
-  MockDatabase mockDatabase;
+  MedicamentoController medicamentoController;
+  MockMedicamentos mockMedicamentos;
 
   setUp(() {
-    mockDatabase = MockDatabase();
-    repositoryMedicamentos = RepositoryMedicamentos();
+    mockMedicamentos = MockMedicamentos();
+    medicamentoController = MedicamentoController(
+      medicamentoRepository: mockMedicamentos,
+    );
   });
 }
