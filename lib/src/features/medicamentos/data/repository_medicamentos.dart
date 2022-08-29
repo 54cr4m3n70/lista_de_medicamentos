@@ -23,15 +23,29 @@ class MedicamentosRepository implements IMedicamentoRepository {
   }
 
   @override
-  Future<List<Medicamento>> getAllMedicamentos() {
-    // TODO: implement getAllMedicamentos
-    throw UnimplementedError();
+  Future<List<Medicamento>> getAllMedicamentos() async {
+    final db = await MedicamentosRepository.db();
+    final List<Map<String, dynamic>> maps = await db.query('medicamentos');
+
+    return List.generate(
+      maps.length,
+      (i) => Medicamento(
+        id: maps[i]['id'],
+        nome: maps[i]['nome'],
+        descricao: maps[i]['descricao'],
+      ),
+    );
   }
 
   @override
-  Future<void> remove(int id) {
-    // TODO: implement remove
-    throw UnimplementedError();
+  Future<void> remove(int id) async {
+    final db = await MedicamentosRepository.db();
+
+    await db.delete(
+      'medicamentos',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
   }
 
   @override
